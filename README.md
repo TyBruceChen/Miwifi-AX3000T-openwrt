@@ -1,5 +1,6 @@
 # 小米路由器AX3000T解锁SSH，安装ShellCrash直接科学上网，ShellClash
 小米路由器AX3000T解锁SSH，安装ShellCrash直接科学上网，不用刷机openwrt
+视频教程：▶ https://youtu.be/NfQ-ELR-TD8
 
 ## 一、Xiaomi 路由器 AX3000T 解锁SSH:
 ### 1、Windows搜索cmd，以管理员身份运行：
