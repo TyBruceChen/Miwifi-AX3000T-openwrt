@@ -55,4 +55,24 @@ Optional & recommended: verify the firmware image package that is sent to the ro
 
 5.进入uboot后台刷入固件，刷openwrt的话分区就选 qwrt ,刷squashfs-sysupgrade格式的就可以，不行就先刷initramfs-kernel然后再到后台去升级为squashfs-sysupgrade格式的固件，如果失败或设备进不了系统就再刷一次，这个可能要多试几次,我也刷了几次才成功。
 
+## Debugging:
+```
+@    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!
+Someone could be eavesdropping on you right now (man-in-the-middle attack)!
+It is also possible that a host key has just been changed.
+The fingerprint for the RSA key sent by the remote host is
+SHA256:l4Vwh73pv2Ch4nsIkE+Ts66zySIY407q/fo7BsKuqOY.
+Please contact your system administrator.
+...know_host: 10
+````
+The warning message you're seeing indicates that the host key of the remote machine (192.168.31.1) has changed since the last time you connected to it. This can happen for a few reasons, such as the remote machine being reinstalled or its SSH configuration being changed. It could also indicate a man-in-the-middle attack, but if you know the change is legitimate, you can safely update your known_hosts file.
+
+Remove the old host key from the known_hosts file:
+
+    ssh-keygen -R 192.168.31.1
+    
+Or by manually removing the line 10 in ~/.ssh/know_host
+
 **Thanks to all the original authors!**
