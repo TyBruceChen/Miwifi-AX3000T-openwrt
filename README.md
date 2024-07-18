@@ -1,6 +1,4 @@
-# 小米路由器AX3000T解锁SSH，安装ShellCrash直接科学上网，ShellClash
-小米路由器AX3000T解锁SSH，安装ShellCrash直接科学上网，不用刷机openwrt<br>
-视频教程：▶ https://youtu.be/NfQ-ELR-TD8
+# 小米路由器AX3000T解锁SSH，安装ShellCrash直接科学上网，ShellClash, OpenWrt
 
 ## 一、Xiaomi 路由器 AX3000T 解锁SSH:
 ### 1、Windows搜索cmd，以管理员身份运行 (for macOS, quotes ```"``` are required to apply to two sides at the link for the omission of considering ```;```.)：
@@ -45,9 +43,11 @@ ShellCrash安装源：
 Clash管理后台：http://192.168.31.1:9999/ui
 
 ## Or install OpenWRT from Uboot (from [zc360/Xiaomi-ax3000t-openwrt](https://github.com/zc360/Xiaomi-ax3000t-openwrt)):
-1.用MobaXterm将uboot文件上传到路由器的 /tmp 文件夹
+1.用MobaXterm将uboot文件上传到路由器的 /tmp 文件夹t
 
-2.输入 cd /tmp 命令进入 /tmp 目录。
+2.输入 cd /tmp 命令进入 /tmp 目录。(or through scp transmission by: ```scp -O Downloads/mt7981_ax3000t-fip-fixed-parts-multi-layout.bin root@192.168.31.1:/tmp```, pay attention here we use ```-O``` to enforce our PC (mac) use the older scp protocol, rather than the new one which is sftp, since the sftp-server is not installed on the original busybox OS)
+
+Optional & recommended: verify the firmware image package that is sent to the router: ```md5sum mt7981_ax3000t-fip-fixed-parts-multi-layout.bin```, which will return the verification code: ```d89f9ef5955840913428ee9eca69957f```. (from [Bilibili/OpenRouter](https://www.bilibili.com/video/BV1dj411h7EP/?spm_id_from=333.1007.top_right_bar_window_history.content.click&vd_source=1db61c2ba3ce56a634310a7590956269))
 
 3.输入 mtd write mt7981_xiaomi_ax3000t-u-boot.bin FIP 命令以进行刷机操作。
 
@@ -55,4 +55,4 @@ Clash管理后台：http://192.168.31.1:9999/ui
 
 5.进入uboot后台刷入固件，刷openwrt的话分区就选 qwrt ,刷squashfs-sysupgrade格式的就可以，不行就先刷initramfs-kernel然后再到后台去升级为squashfs-sysupgrade格式的固件，如果失败或设备进不了系统就再刷一次，这个可能要多试几次,我也刷了几次才成功。
 
-Thanks to all the original authors!
+**Thanks to all the original authors!**
