@@ -55,6 +55,10 @@ Optional & recommended: verify the firmware image package that is sent to the ro
 
 5.进入uboot后台刷入固件，刷openwrt的话分区就选 qwrt ,刷squashfs-sysupgrade格式的就可以，不行就先刷initramfs-kernel然后再到后台去升级为squashfs-sysupgrade格式的固件，如果失败或设备进不了系统就再刷一次，这个可能要多试几次,我也刷了几次才成功。
 
+Extra Sources: <br>
+[Xiaomi AX3000T info website (openwrt)](https://openwrt.org/inbox/toh/xiaomi/ax3000t) <br>
+[Build customize Openwrt by P3TERX](https://github.com/P3TERX/Actions-OpenWrt)
+
 ## Debugging:
 ```
 @    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @
@@ -75,4 +79,4 @@ Remove the old host key from the known_hosts file:
     
 Or by manually removing the line 10 in ~/.ssh/know_host
 
-**Thanks to all the original authors!**
+# Thanks to all the original authors!
