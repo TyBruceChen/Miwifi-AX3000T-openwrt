@@ -1,7 +1,11 @@
 # 小米路由器AX3000T解锁SSH，安装ShellCrash直接科学上网，ShellClash, OpenWrt
 
+## Prerequisite: 'Debase' the system version (from 1.064, in my case) to a lower version (1.047):
+Download the [official tool](https://bigota.miwifi.com/xiaoqiang/tools/MIWIFIRepairTool.x86.zip) which writes the ROM at https://www1.miwifi.com/miwifi_download.html. (Windows PC compatible only). Find a lower version of the ROM (there are lots in CSDN). Use a cable to connect your PC to the router. Select the ethernet port (card) that connects to the router, then restart the router. The installation should start.
+
+
 ## 一、Xiaomi 路由器 AX3000T 解锁SSH:
-### 1、Windows搜索cmd，以管理员身份运行 (for macOS, quotes ```"``` are required to apply to two sides at the link for the omission of considering ```;```.)：
+#### 1.Windows搜索cmd，以管理员身份运行 (for macOS, quotes ```"``` are required to apply to two sides at the link for the omission of considering ```;```.)：
 ```
 curl -X POST http://192.168.31.1/cgi-bin/luci/;stok=XXXXXX/api/misystem/arn_switch -d "open=1&model=1&level=%0Anvram%20set%20ssh_en%3D1%0A"
 curl -X POST http://192.168.31.1/cgi-bin/luci/;stok=XXXXXX/api/misystem/arn_switch -d "open=1&model=1&level=%0Anvram%20commit%0A"
@@ -11,14 +15,14 @@ curl -X POST http://192.168.31.1/cgi-bin/luci/;stok=XXXXXX/api/misystem/arn_swit
 Optional: <br>
 To disable the password at login: ```curl -X POST "http://192.168.31.1/cgi-bin/luci/;stok=XXXXXX/api/misystem/arn_switch" -d "open=1&model=1&level=%0Apasswd+-d+root+password%0A"```
    
-## 2、计算SSH密码
+#### 2.计算SSH密码
 https://miwifi.dev/ssh 输入路由器的SN码，在路由器后台可以查询SN码。
 
 用putty软件登录路由器，<a href="https://github.com/eujc/AX3000T/releases/download/gongju/AX3000T.zip" target="_blank">点击下载>></a>
 
 用户名是：root，密码是上一步计算出来的，提示 Are U OK 表示已经登录成功。
 
-## 3、永久开启SSH（重启不会关闭）
+#### 3.永久开启SSH（重启不会关闭）
 
     mkdir /data/auto_ssh && cd /data/auto_ssh
     curl -O https://fastly.jsdelivr.net/gh/lemoeo/AX6S@main/auto_ssh.sh
@@ -30,7 +34,7 @@ https://miwifi.dev/ssh 输入路由器的SN码，在路由器后台可以查询S
     uci set firewall.auto_ssh.enabled='1'
     uci commit firewall
 
-## 二、安装ShellCrash（ShellClash）：
+## Option 1: 安装ShellCrash（ShellClash）：
 ShellCrash安装源：
 
     export url='https://fastly.jsdelivr.net/gh/juewuy/ShellCrash@master' && sh -c "$(curl -kfsSl $url/install.sh)" && source /etc/profile &> /dev/null
@@ -42,7 +46,7 @@ ShellCrash安装源：
 <br>
 Clash管理后台：http://192.168.31.1:9999/ui
 
-## Or install OpenWRT from Uboot (from [zc360/Xiaomi-ax3000t-openwrt](https://github.com/zc360/Xiaomi-ax3000t-openwrt)):
+## Option 2: Install OpenWRT from Uboot (from [zc360/Xiaomi-ax3000t-openwrt](https://github.com/zc360/Xiaomi-ax3000t-openwrt)):
 1.用MobaXterm将uboot文件上传到路由器的 /tmp 文件夹t
 
 2.输入 cd /tmp 命令进入 /tmp 目录。(or through scp transmission by: ```scp -O Downloads/mt7981_ax3000t-fip-fixed-parts-multi-layout.bin root@192.168.31.1:/tmp```, pay attention here we use ```-O``` to enforce our PC (mac) use the older scp protocol, rather than the new one which is sftp, since the sftp-server is not installed on the original busybox OS)
